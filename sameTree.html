@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	class Node {
+		constructor(data, left, right) {
+			this.data = (data ===undefined ? 0 : data);
+			this.left = (left === undefined ? null : left);
+			this.right = (right===undefined ? null : right);
+		}
+	}
+	class BinarySearchTree {
+		constructor() {
+			// root of a binary seach tree
+			this.root = null;
+		}
+		
+		insert(data) {
+			const newNode = new Node(data);
+			// root is null then node will
+			// be added to the tree and made root.
+			if (this.root === null)
+				this.root = newNode;
+			else
+				// find the correct position in the
+				// tree and add the node
+				this.insertNode(this.root, newNode);
+		}
+	
+		insertNode(node, newNode) {
+			if (node.left === null) {
+				node.left = newNode;
+			} else if (node.right === null) {
+				node.right = newNode;
+			}
+		}
+	}
+	const makeTree = function(arr) {
+	  const BST = new BinarySearchTree();
+		arr.forEach( item => {
+			BST.insert(item);
+		})
+		console.log(BST);
+		return BST;
+	};
+	const isSameTree = function(p, q) {
+		if (!p && !q) {
+			return true;
+		}
+		if (!p || !q) {
+			return false;
+		}
+		let nodeP = p.root ? p.root: p;
+		let nodeQ = q.root ? q.root: q;
+		if (nodeP.data !== nodeQ.data) {
+			return false;
+		}
+		 return isSameTree(nodeP.left, nodeQ.left) && isSameTree(nodeP.right, nodeQ.right);
+	};
+	
+	const arrP = [1,2,1];
+	const arrQ = [1,1,2];
+	
+	let p = makeTree(arrP);
+	let q = makeTree(arrQ);
+	console.log(isSameTree(p,q));
+	
+//correct variant
+// 	Approach 1: Recursion
+// 	Intuition
+//
+// 	The simplest strategy here is to use recursion. Check if p and q nodes are not None, and their values are equal. If all checks are OK, do the same for the child nodes recursively.
+//
+// 		Implementation
+	/**
+	 * Definition for a binary tree node.
+	 * public class TreeNode {
+	 *     int val;
+	 *     TreeNode left;
+	 *     TreeNode right;
+	 *     TreeNode(int x) { val = x; }
+	 * }
+	 */
+	// Complexity Analysis
+	
+	// Time complexity : \mathcal{O}(N)O(N), where N is a number of nodes in the tree, since one visits each node exactly once.
+	//
+	// 	Space complexity : \mathcal{O}(\log(N))O(log(N)) in the best case of completely balanced tree and \mathcal{O}(N)O(N) in the worst case of completely unbalanced tree, to keep a recursion stack.
+	//
+	//
+	// 	Approach 2: Iteration
+	// Intuition
+	//
+	// Start from the root and then at each iteration pop the current node out of the deque. Then do the same checks as in the approach 1 :
+	//
+	// p and p are not None,
+	//
+	// 	p.val is equal to q.val,
+	//
+	// 	and if checks are OK, push the child nodes.
+	//
+	// 	Implementation
+	//
+	// Complexity Analysis
+	
+	// Time complexity : \mathcal{O}(N)O(N) since each node is visited exactly once.
+		
+		// Space complexity : \mathcal{O}(\log(N))O(log(N)) in the best case of completely balanced tree and \mathcal{O}(N)O(N) in the worst case of completely unbalanced tree, to keep a deque.
+</script>
+</body>
+</html>
+

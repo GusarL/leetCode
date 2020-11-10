@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	const maxProfit = function(prices) {
+		let minPrice = prices[0];
+		let maxProfit = 0;
+		for (let price = 0; price < prices.length; price++) {
+			if (prices[price] < minPrice) {
+				minPrice = prices[price];
+			} else if (prices[price] - minPrice > maxProfit) {
+				maxProfit = prices[price] - minPrice;
+			}
+		}
+		return maxProfit;
+	};
+
+
+
+//correct variant
+
+</script>
+</body>
+</html>
+

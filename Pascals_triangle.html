@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	const generate = function(numRows) {
+	  let triangle = [];
+		// First base case; if user requests zero rows, they get zero rows.
+		if (numRows == 0) {
+			return triangle;
+		}
+		// Second base case; first row is always [1].
+		triangle.push([1]);
+		for (let rowNum = 1; rowNum < numRows; rowNum++) {
+		  let row = [];
+		  let prevRow = triangle[rowNum - 1];
+			// The first row element is always 1.
+			row.push(1);
+			for (let j = 1; j < rowNum; j++) {
+			  row.push(prevRow[j-1] + prevRow[j])
+			}
+			// The last row element is always 1.
+			row.push(1);
+			triangle.push(row);
+		}
+		return triangle;
+	};
+
+
+
+//correct variant
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	const deleteDuplicates = function(head) {
+		let currentNode;
+		if (head !== null) {
+			currentNode = head;
+			while (currentNode.next) {
+				if (currentNode.next.val === currentNode.val) {
+					currentNode.next = currentNode.next.next;
+				} else {
+					currentNode = currentNode.next;
+				}
+			}
+		}
+		console.log(head);
+		return head;
+	}
+	
+	// deleteDuplicates({val:1, next:{val:1, next:{val:2, next: null}}});
+	deleteDuplicates({val:1, next:{val:1, next:{val:2, next: {val: 3, next: {val:3, next: null}}}}});
+//correct variant
+
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Two sum</title>
+</head>
+<body>
+  <script>
+		let twoSum = function(nums, target) {
+			let first = 0;
+			let last = nums.length - 1;
+			
+			if (nums[first] > target || (nums[first] + nums[last] < target)) {
+				first = last = null;
+				return [first, last];
+			}
+			while (nums[first] + nums[last] !== target) {
+				if (nums[last] > target || (target - nums[last]) < nums[first]) {
+					last--
+				} else {
+					first++
+				}
+				if (last < 0 || first > nums.length - 1) {
+					first = last = null;
+					break;
+				}
+			}
+			return [first, last];
+		};
+		console.log(twoSum([2, 3, 5, 7, 8, 11], 12));
+
+	</script>
+</body>
+</html>

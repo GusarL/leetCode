@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Two sum</title>
+</head>
+<body>
+  <script>
+		let twoSum = function(nums, target) {
+			let ak = {};
+			for(let i = 0; i< nums.length; i++) {
+				if(ak.hasOwnProperty(target - nums[i])) {
+					return [ak[target - nums[i]], i]
+				}
+				if(!ak.hasOwnProperty(nums[i])) {
+					ak[nums[i]] = i
+				}
+			}
+			console.log('No two sum solution');
+		};
+		console.log(twoSum([2, 3, 5, 7, 8, 11], 12));
+		console.log(twoSum([2, 7, 11, 15], 9));
+		console.log(twoSum([9, 10, 11, 15], 9));
+		console.log(twoSum([1, 2, 3, 4], 9));
+
+	</script>
+	<script>
+		var two_Sum = function(nums, target) {
+			let map = new Map();
+			for(let [ind,item] of nums.entries()){
+				if(map.has(target-item))
+					return [map.get(target-item),ind];
+				map.set(item,ind);
+			}
+			return [];
+		};
+		console.log(two_Sum([2, 3, 5, 7, 8, 11], 12));
+		console.log(two_Sum([2, 7, 11, 15], 9));
+		console.log(two_Sum([9, 10, 11, 15], 9));
+		console.log(two_Sum([1, 2, 3, 4], 9));
+	</script>
+</body>
+</html>
+
+<!--Complexity Analysis:-->
+<!--Time complexity : O(n)O(n). We traverse the list containing nn elements only once. Each look up in the table -->
+<!--costs only O(1)O(1) time.-->
+
+<!--Space complexity : O(n)O(n). The extra space required depends on the number of items stored in the hash table, -->
+<!--which stores at most nn elements.-->
+
+

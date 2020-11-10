@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	//option 1
+	const strStr = function(haystack, needle) {
+		let index;
+		if (needle === '') {
+			index = 0;
+		} else {
+			index =haystack.indexOf(needle);
+		}
+		return index;
+	}
+	
+	//option 2
+	const strStr = function(haystack, needle) {
+		let index;
+		if (needle === '') {
+			index = 0;
+		} else {
+			const regexp = new RegExp(needle);
+			const substrIndex = haystack.match(regexp);
+			substrIndex ? index = substrIndex.index: index = -1;
+		}
+		return index;
+	}
+	
+	console.log(strStr ('hello', 'll'));
+	console.log(strStr ('aaaaa', 'bba'));
+//correct variant
+
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	class Node {
+		constructor(data, left, right) {
+			this.val = (data ===undefined ? 0 : data);
+			this.left = (left === undefined ? null : left);
+			this.right = (right===undefined ? null : right);
+		}
+	}
+	class BinarySearchTree {
+		constructor() {
+			// root of a binary seach tree
+			this.root = null;
+		}
+		
+		insert(data) {
+			const newNode = new Node(data);
+			// root is null then node will
+			// be added to the tree and made root.
+			if (this.root === null)
+				this.root = newNode;
+			else
+				// find the correct position in the
+				// tree and add the node
+				this.insertNode(this.root, newNode);
+		}
+	
+		insertNode(node, newNode) {
+			if (node.left === null) {
+				node.left = newNode;
+			} else if (node.right === null) {
+				node.right = newNode;
+			}
+		}
+	}
+	const makeTree = function(arr) {
+	  const BST = new BinarySearchTree();
+		arr.forEach( item => {
+			BST.insert(item);
+		})
+		console.log(BST);
+		return BST;
+	};
+	//recursively
+	function isSymmetric(root) {
+		return isMirror(root, root);
+	}
+	const isMirror = function(p, q) {
+		if (!p && !q) {
+			return true;
+		}
+		if (!p || !q) {
+			return false;
+		}
+		let nodeP = p.root ? p.root: p;
+		let nodeQ = q.root ? q.root: q;
+
+		return (nodeP.val === nodeQ.val) && isSymmetric(nodeP.left, nodeQ.left) && isSymmetric(nodeP.right, nodeQ.right);
+	};
+
+	const arrP = [1,2,2,null,3,null,3];//makeTree doesn't work with leaf equals null
+	
+	let p = makeTree(arrP);
+	// console.log(isSymmetric(p));
+	
+//correct variant
+// 	Approach 1: Recursion
+// 	Intuition
+//
+// 	The simplest strategy here is to use recursion. Check if p and q nodes are not None, and their values are equal. If all checks are OK, do the same for the child nodes recursively.
+//
+// 		Implementation
+	/**
+	 * Definition for a binary tree node.
+	 * public class TreeNode {
+	 *     int val;
+	 *     TreeNode left;
+	 *     TreeNode right;
+	 *     TreeNode(int x) { val = x; }
+	 * }
+	 */
+	// Complexity Analysis
+	
+	// Time complexity : \mathcal{O}(N)O(N), where N is a number of nodes in the tree, since one visits each node exactly once.
+	//
+	// 	Space complexity : \mathcal{O}(\log(N))O(log(N)) in the best case of completely balanced tree and \mathcal{O}(N)O(N) in the worst case of completely unbalanced tree, to keep a recursion stack.
+	//
+	//
+	// 	Approach 2: Iteration
+	const isSymmetric = function(root) {
+		let queue = [];
+		queue.push(root);
+		queue.push(root);
+		while (queue.length) {
+			const t1 = queue.shift();
+			const t2 = queue.shift();
+			if (t1 === null && t2 === null) continue;
+			if (t1 === null || t2 === null) return false;
+			const data1 = t1.root ? t1.root.val : t1.val;
+			const data2 = t2.root ? t2.root.val : t2.val;
+			if (data1 !== data2) return false;
+			queue.push(t1.root ? t1.root.left: t1.left);
+			queue.push(t2.root ? t2.root.right: t2.right);
+			queue.push(t1.root ? t1.root.right: t1.right);
+			queue.push(t2.root ? t2.root.left: t2.left);
+		}
+			return true;
+		};
+	console.log(isSymmetric(p));
+	
+	// Intuition
+	//
+	// Start from the root and then at each iteration pop the current node out of the deque. Then do the same checks as in the approach 1 :
+	//
+	// p and p are not None,
+	//
+	// 	p.val is equal to q.val,
+	//
+	// 	and if checks are OK, push the child nodes.
+	//
+	// 	Implementation
+	//
+	// Complexity Analysis
+	
+	// Time complexity : \mathcal{O}(N)O(N) since each node is visited exactly once.
+		
+		// Space complexity : \mathcal{O}(\log(N))O(log(N)) in the best case of completely balanced tree and \mathcal{O}(N)O(N) in the worst case of completely unbalanced tree, to keep a deque.
+</script>
+</body>
+</html>
+

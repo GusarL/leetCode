@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script>
+	const singleNumberHash = function(nums) {
+		let hashTable = {};
+		let single = 0;
+		for (let i = 0; i < nums.length; i++) {
+			hashTable[nums[i]] = (hashTable[nums[i]] ? hashTable[nums[i]]: 0) +1 ;
+		}
+		for(let i = 0; i < nums.length; i++){
+		  if (hashTable[nums[i]] === 1) {
+				single = i;
+			}
+		}
+		return single;
+	};
+	singleNumberHash([1]);
+	
+	const singleNumberMath = function(nums) {
+		let sumOfSet = 0;
+		let sumOfNums = 0;
+		let hashSet = {};
+		for (let i = 0; i < nums.length; i++) {
+			if (!hashSet[nums[i]]) {
+				hashSet[nums[i]] = 1;
+				sumOfSet += nums[i];
+			}
+			sumOfNums += nums[i];
+		}
+		
+		return 2 * sumOfSet - sumOfNums;
+	};
+	console.log(singleNumberMath([4,1,2,1,2]));
+	
+	const singleNumberES6 = function(nums) {
+		let set = new Set();
+		for (let num of nums) {
+			if(set.has(num)){
+			set.delete(num);
+			} else {
+				set.add(num);
+			}
+		}
+		return Array.from(set)[0];
+	};
+	singleNumberES6([1]);
+	
+	const singleNumberXOR = function(nums) {
+		let result = 0;
+		for (let num of nums) {
+			result ^= num;
+		}
+		return result;
+	};
+	console.log(singleNumberXOR([4,1,2,1,2]));
+//correct variant
+
+</script>
+</body>
+</html>
+

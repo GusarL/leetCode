@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Two sum</title>
+</head>
+<body>
+  <script>
+		let twoSum = function(nums, target) {
+			let hashMap = new Map();
+			nums.forEach((value, i) => {
+				hashMap.set(value, i);
+			});
+			for (let i = 0; i < nums.length; i++) {
+				let complement = target - nums[i];
+				if (hashMap.has(complement) && hashMap.get(complement) != i) {
+					return [i, hashMap.get(complement)];
+				}
+			 }
+			console.log('No two sum solution');
+		};
+		// console.log(twoSum([2, 3, 5, 7, 8, 11], 12));
+		// console.log(twoSum([2, 7, 11, 15], 9));
+		// console.log(twoSum([9, 10, 11, 15], 9));
+		console.log(twoSum([1, 2, 3, 4], 9));
+
+	</script>
+</body>
+</html>
+
+<!--Complexity Analysis:-->
+
+<!--Time complexity : O(n)O(n). We traverse the list containing nn elements exactly twice. Since the hash table reduces the look up time to O(1)O(1), the time complexity is O(n)O(n).-->
+
+<!--Space complexity : O(n)O(n). The extra space required depends on the number of items stored in the hash table, which stores exactly nn elements. -->
+
