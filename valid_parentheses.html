@@ -6,35 +6,35 @@
 </head>
 <body>
 <script>
-	const isValid = function (s) {
-		const sArray = s.split('');
-		const bracketMap = {
-			'(': ')',
-			'[': ']',
-			'{': '}'
-		}
-		let resultStack = [];
-		let stopFlag = false;
-		sArray.forEach(letter => {
-			if (letter === "(" || letter === "[" || letter === "{") {
-				resultStack.push(letter);
-				return;
-			}
-			if (letter === ")" || letter === "]" || letter === "}") {
-				if (!resultStack.length) {
-					return stopFlag = true
-				}
-				if (bracketMap[resultStack[resultStack.length - 1]] === letter) {
-					resultStack.pop();
-				} else {
-					stopFlag = true;
-				}
-			}
-		});
-		
-		return stopFlag ? false : resultStack.length === 0;
-	};
-	console.log(isValid("(])"));
+	// const isValid = function (s) {
+	// 	const sArray = s.split('');
+	// 	const bracketMap = {
+	// 		'(': ')',
+	// 		'[': ']',
+	// 		'{': '}'
+	// 	}
+	// 	let resultStack = [];
+	// 	let stopFlag = false;
+	// 	sArray.forEach(letter => {
+	// 		if (letter === "(" || letter === "[" || letter === "{") {
+	// 			resultStack.push(letter);
+	// 			return;
+	// 		}
+	// 		if (letter === ")" || letter === "]" || letter === "}") {
+	// 			if (!resultStack.length) {
+	// 				return stopFlag = true
+	// 			}
+	// 			if (bracketMap[resultStack[resultStack.length - 1]] === letter) {
+	// 				resultStack.pop();
+	// 			} else {
+	// 				stopFlag = true;
+	// 			}
+	// 		}
+	// 	});
+	//
+	// 	return stopFlag ? false : resultStack.length === 0;
+	// };
+	// console.log(isValid("(])"));
 //correct variant
 	
 	// class Solution {
@@ -78,6 +78,61 @@
 	// return stack.isEmpty();
 	// }
 	// }
+	
+	//correct option in JavaScript
+	class Stack {
+		constructor () {
+			this.storage = {};
+			this.count = 0;
+	  }
+	  
+	  getCount () {
+			return this.count;
+		}
+		
+		push(val){
+			this.storage[this.count] = val;
+			this.count++;
+		}
+		
+		pop(){
+			if(this.count === 0){
+				return undefined;
+			}
+			this.count--;
+			let result = this.storage[this.count];
+			delete this.storage[this.count];
+			
+			return result;
+		}
+		
+		peek(){
+			return this.storage[this.count - 1];
+		}
+		
+		isEmpty(){
+			return this.count === 0;
+		}
+	}
+	const isValid = function (s) {
+		let stack = new Stack();
+		for (let character of s){
+			if (character === '{' || character === '[' || character === '(') {
+			stack.push(character);
+			} else if (!stack.isEmpty() && character === '}' && stack.peek() === '{') {
+				stack.pop();
+			} else if (!stack.isEmpty() && character === ']' && stack.peek() === '[') {
+				stack.pop();
+			} else if (!stack.isEmpty() && character === ')' && stack.peek() === '(') {
+				stack.pop();
+				} else {
+				return false;
+			}
+		}
+		return stack.isEmpty();
+	}
+	console.log(isValid("(])"));
+
 </script>
 </body>
 </html>
